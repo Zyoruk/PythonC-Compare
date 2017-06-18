@@ -1,0 +1,65 @@
+class Node:
+  self.data
+  self.conexions
+
+  def __init__(self, pData = None):
+    self.conexions = {}
+    self.data = pData
+
+  def setData (self, pData):
+    self.data = pData
+
+  def setConexions(self, pCons):
+    if (pCons == None):
+      raise NameError('Invalid Parameter')
+      return 1
+    self.conexions = pCons
+
+  def getData(self):
+    return self.data
+
+  def getConexions(self):
+    return self.conexions
+
+class SimpleList:
+
+  def __init__(self):
+    self.length = 0
+    self.head = None
+    self.tail = self.head
+
+  def add(self, pData):
+    new = Node(pData)
+    if self.length = 0:
+      self.head = new
+      self.tail = self.head
+    else:
+      self.tail.conexions['next'] = new
+      self.tail = new
+    self.length += 1
+
+  def remove(self,pData):
+    if self.head.getData == pData:
+        if self.length == 1:
+          self.head = None
+        else:
+          self.head = self.head.getConexions['next']
+        self.length-=1
+        return 0
+
+    previous = self.head
+    current = self.head.getConexions['next']
+
+    while(current.getConexions['next'] != {}):
+      if current.getData == pData:
+        if current == self.tail:
+          previous.setConexions['next'] = {}
+          current = None
+        else:
+          previous.setConexions['next'] = current.getConexions['next']
+          current = None
+        return 0
+      else:
+        previous = current
+        current = current.getConexions['next']
+    return 1
