@@ -1,3 +1,7 @@
+'''
+A node is a simple data container, and has conexions with other nodes.
+'''
+
 class Node:
   self.data
   self.conexions
@@ -21,6 +25,9 @@ class Node:
   def getConexions(self):
     return self.conexions
 
+'''
+A simple list is a unidirectional list.
+'''
 class SimpleList:
 
   def __init__(self):
@@ -34,7 +41,7 @@ class SimpleList:
       self.head = new
       self.tail = self.head
     else:
-      self.tail.conexions['next'] = new
+      self.tail.setConexions({'next':new})
       self.tail = new
     self.length += 1
 
@@ -43,23 +50,77 @@ class SimpleList:
         if self.length == 1:
           self.head = None
         else:
-          self.head = self.head.getConexions['next']
+          self.head = self.head.getConexions()['next']
         self.length-=1
         return 0
 
     previous = self.head
-    current = self.head.getConexions['next']
+    current = self.head.getConexions()['next']
 
-    while(current.getConexions['next'] != {}):
+    while(current.getConexions()['next'] != {}):
       if current.getData == pData:
         if current == self.tail:
-          previous.setConexions['next'] = {}
+          previous.setConexions({})
           current = None
         else:
-          previous.setConexions['next'] = current.getConexions['next']
+          previous.setConexions({'next': current.getConexions()['next']}
           current = None
         return 0
       else:
         previous = current
-        current = current.getConexions['next']
-    return 1
+        current = current.getConexions()['next']
+        return 1
+
+class DoubleList:
+  def __init__ (self):
+    self.length = 0
+    self.head = None
+    self.tail = self.head
+
+  def add(self, pData):
+    new = Node(pData)
+    if self.length = 0:
+      self.head = new
+      self.tail = self.head
+    else:
+      self.tail.setConexions({'next':new})
+      new.setConexions({'previous': self.tail})
+      self.tail = new
+    self.length += 1
+
+  def remove(self,pData):
+    if self.head.getData == pData:
+        if self.length == 1:
+          self.head = None
+        else:
+          self.head = self.head.getConexions()['next']
+          cons = self.head.getConexions()
+          cons['previous'] = None
+          self.head.setConexions(cons)
+        self.length-=1
+        return 0
+
+    previous = self.head
+    current = self.head.getConexions()['next']
+
+    while(current.getConexions()['next'] != {}):
+      if current.getData == pData:
+        if current == self.tail:
+          previous.setConexions({})
+          current = None
+        else:
+          next = current.getConexions()['next']
+          cons = previous.getConexions()
+          cons ['next'] = next
+          previous.setConexions(cons)
+
+          cons = next.getConexions()
+          cons['previous'] = previous
+          next.setConexions(cons)
+
+          current = None
+        return 0
+      else:
+        previous = current
+        current = current.getConexions()['next']
+        return 1
