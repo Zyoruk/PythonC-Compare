@@ -1,10 +1,4 @@
-import sys
-import random
-import argparse
-import timeit
-import time
-import array
-
+import sys ,random, argparse, timeit, time, array
 
 _LEFT = 0
 _RIGHT = 1
@@ -274,17 +268,23 @@ try:
 except:
     pass
 
+
+#Create the argument parser
 parser = argparse.ArgumentParser(prog='datastructs')
 parser.add_argument('structure',metavar='struct',choices=['list','tree','array'], help='Enter possible data structs list, tree, array')
 parser.add_argument('data' ,metavar='data',type=int,help='Data')
 
+#Take arguments and transform to iterable
 args = vars(parser.parse_args())
 
+#Store arguments
 dataSize = args['data']
 structure = args['structure']
 
+#List of possible elements to pick
 alldata = range(0,9999999)
-start_time = timeit.default_timer()
+
+
 
 if structure == 'list':
   print 'Creating the list of {} elements.'.format(dataSize)
