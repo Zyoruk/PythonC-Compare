@@ -1,5 +1,9 @@
 import sys ,random, argparse, timeit, time, array
 
+def scrambled(orig):
+    dest = orig[:]
+    random.shuffle(dest)
+    return dest
 
 #Create the argument parser
 parser = argparse.ArgumentParser(prog='datastructs')
@@ -20,7 +24,6 @@ alldata = range(0,9999999)
 
 
 
-print 'Creating the {} of {} elements.'.format(structure, dataSize)
 
 
 
@@ -292,6 +295,9 @@ try:
 except:
     pass
 
+
+print 'Creating the {} of {} elements.'.format(structure, dataSize)
+
 if structure == 'list':
   l = []
   cont = 0
@@ -357,8 +363,11 @@ elif (structure == 'tree'):
   mytree = BinarySearchTree()
   cont = 0
   start_time = timeit.default_timer()
-  while cont <= dataSize:      
-    mytree.insert(alldata[cont])
+  added = []
+  while cont <= dataSize:
+    number = random.choice(alldata)      
+    mytree.insert(number)
+    added.append(number)
     cont +=  1
   elapsed = timeit.default_timer() - start_time
   print 'Took ' + str(elapsed) + ' seconds.'
@@ -367,7 +376,7 @@ elif (structure == 'tree'):
 
   start_time = timeit.default_timer()
   try:
-    number = random.choice(alldata[:dataSize])
+    number = random.choice(added)
     mytree.pop(number)
   except:
     pass
@@ -380,7 +389,7 @@ elif (structure == 'tree'):
 
   start_time = timeit.default_timer()
   try:
-    number = random.choice(alldata[:dataSize])
+    number = random.choice(added)
     mytree.pop(number)
   except:
     pass
